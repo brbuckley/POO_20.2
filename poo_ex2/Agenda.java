@@ -1,28 +1,22 @@
-
 package poo_ex2;
 
+import java.util.ArrayList;
+
 public class Agenda {
-    Contato[] contatos= new Contato[20];
+
+    ArrayList<Contato> contatos = new ArrayList<Contato>();
     
-    void adicionar(Contato temp,int i){ //adiciona o contato a posição desejada
+    void adicionar(Contato temp){ //adiciona o contato a proxima posição
         Contato contato= new Contato();
-        contato.nome=temp.nome;
-        contato.telcel=temp.telcel;
-        contato.telfix=temp.telfix;
-        contatos[i]=contato;
+        contato.setContato(temp.nome, temp.telcel, temp.telfix);
+        contatos.add(contato);
     }
     
     void imprimir(){
-        int i=0;
-        System.out.print("\nAgenda : \n");
-        while(contatos[i]!=null){
-            System.out.print("Nome "+contatos[i].nome+" Tel. cel. "+contatos[i].telcel+" Tel. fixo "+contatos[i].telfix+"\n");
-            i++;
+        System.out.println("\nAgenda :");
+        
+        for(Contato x : contatos){
+            System.out.println("Nome "+x.nome+" Tel. cel. "+x.telcel+" Tel. fixo "+x.telfix);
         }
-    }
-    
-    int isfull(){
-        if (contatos[19]==null)return 0;
-        else return 1;
     }
 }
