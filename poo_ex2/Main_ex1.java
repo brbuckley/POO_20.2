@@ -1,6 +1,12 @@
 
 package poo_ex2;
 
+/*ENUNCIADO
+
+1- Faça um programa de agenda telefônica, com as classes Agenda e Contato
+
+*/
+
 //importes
 import java.util.Scanner;
 
@@ -18,18 +24,19 @@ public class Main_ex1 {
         for(int i=1;i<=20;i++){
 
             System.out.print("Informe o nome, seguido do telefone celular e tel. fixo do contato "+i+"\n");
-            scantemp = scanner.nextLine();
+            scantemp = scanner.nextLine(); // exemplo de entrada "Joel 987654321 23456789" ou "Ana 22222222" 
             
-            if (scantemp.contains("0"))break;//condição de parada do loop
+            if (scantemp.contains("-1"))break;//condição de parada do loop
             
             stringtemp=scantemp.split(" ");//criando cada contato
             contatotemp.nome=stringtemp[0];
             contatotemp.telcel=Integer.parseInt(stringtemp[1]);
-            contatotemp.telfix=Integer.parseInt(stringtemp[2]);
-            agenda.contatos[(i-1)]=contatotemp;
+            if (stringtemp.length!=2)contatotemp.telfix=Integer.parseInt(stringtemp[2]);//telefone fixo como opcional
+            else contatotemp.telfix=0;
+            agenda.adicionar(contatotemp, (i-1));
             
         }
-        System.out.print(agenda.contatos[0].nome+agenda.contatos[0].telcel+agenda.contatos[0].telfix+"\n\n"
-                +agenda.contatos[1].nome+agenda.contatos[1].telcel+agenda.contatos[1].telfix+"\n\n");
+        
+        agenda.imprimir();
     }
 }
