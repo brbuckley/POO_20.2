@@ -13,7 +13,10 @@ public class Mercado {
     // tipo de pagamento 0 para dinheiro, 1 para cheque e 2 para cartão        
     boolean tipoPagamentoAceito(int t){
         if(t==0 | t==2)return true;
-        else return false;
+        else {
+            System.out.print("Tipo de pagamento invalido\n");
+            return false;
+        }
     }
     
     void setMercado(int c, String n,int cof){
@@ -66,19 +69,14 @@ public class Mercado {
     //quantidade de cada produto do estoque e adiciona o valor no cofre
     //Porem não checa o saldo do cliente
     void comprar(Carrinho carrinho){ 
-        
-        if(this.tipoPagamentoAceito(carrinho.tipoPagamento)){
-            int temp;
-            for(int i=0;i<carrinho.produtos.size();i++){
-                temp=this.indexCodigo(carrinho.produtos.get(i)[0]);
-                this.produtos.get(temp).estoque-=carrinho.produtos.get(i)[1];
-                this.cofre+=carrinho.total;
-                //this.cofre+=(this.produtos.get(temp).preco)*carrinho.produtos.get(i)[1]; //parte antiga
-                carrinho.total=0;
-                carrinho.produtos.clear();
-            }
+        int temp;
+        for(int i=0;i<carrinho.produtos.size();i++){
+            temp=this.indexCodigo(carrinho.produtos.get(i).codigo);
+            this.produtos.get(temp).estoque-=carrinho.produtos.get(i).estoque;
+            this.cofre+=carrinho.total;
+            carrinho.total=0;
+            carrinho.produtos.clear();
         }
-        else System.out.print("Tipo de pagamento nao aceito\n");
     }
     
 }

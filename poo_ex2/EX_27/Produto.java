@@ -16,7 +16,9 @@ public class Produto {
     }
     
     void imprimirProduto(){
-        
+        System.out.print("Produto: "+this.nome+
+                         "\nPreço: $"+this.preco+" Reais\n"+
+                         "Quantidade: "+this.estoque+"\n\n");
     }
     
 }

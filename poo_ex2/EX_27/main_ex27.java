@@ -11,6 +11,7 @@ Esse pedido pode ser pago em dinheiro, cheque ou cartão.
  */
 public class main_ex27 {
     
+    
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
@@ -28,16 +29,13 @@ public class main_ex27 {
         
         String entrada;
         String[] stringSplit;
-        int codigo;
         
         //supondo que o cliente tenha feito um cadastro antes
         Cliente cliente=new Cliente();
         cliente.setCliente("Ana", 300, 0); 
-        
-        //ToDo loop
-        while(true){
+
+        while(true){//adicionando os produtos pedidos ao carrinho
             
-            //adicionando os produtos pedidos ao carrinho
             System.out.print("Informe o nome do produto que deseja comprar seguido da quantidade: \n");
             entrada=scanner.nextLine();
             
@@ -45,24 +43,62 @@ public class main_ex27 {
             
             stringSplit=entrada.split(" ");
 
-            codigo=mercado.gerarCodigo(stringSplit[0],Integer.parseInt(stringSplit[1]));//pegando o codigo do produto usando a entrada do usuario
-            if(codigo!=-1){//evitar bugs e entradas invalidas
-                int preco=mercado.produtos.get(mercado.indexCodigo(codigo)).preco; //pegando o preço do produto pelo codigo para a funcao 'adicionarProduto'
-                carrinho.adicionarProduto(codigo, Integer.parseInt(stringSplit[1]),preco);//adiciona produto no carrinho se estiver em estoque
-            }
-            else System.out.print("Produto fora do estoque\n");
+            carrinho.adicionarProduto(mercado.produtos.get(mercado.indexNome(stringSplit[0])),Integer.parseInt(stringSplit[1]));//adiciona produto no carrinho se estiver em estoque
         }
         
-        //ToDo prints e confirmação de compra
         carrinho.imprimirCarrinho();
-        if(carrinho.total>cliente.checarSaldo()){// if 'sem saldo' : print erro e finaliza
-            System.out.print("\nSaldo Insuficiente\n"); 
-        }
-        System.out.print("\nDeseja finalizar a compra?\n"); 
         
-        //ToDo finalizar compra
-        //esperar uma resposta true de cliente.pagar()
-        //lembrar de checar saldo do cliente antes de mercado.comprar()
+        // Se o valor da compra for maior que o saldo do cliente
+        while(carrinho.total>cliente.saldo){
+            System.out.print("\nSaldo Insuficiente\n");
+            System.out.print("\nDeseja remover algum produto? S/N\n");
+            entrada=scanner.nextLine();
+            
+            if(entrada.matches("S")){
+                System.out.print("Qual o nome do produto que deseja remover e quantos? (-1 para todos do mesmo item)\n");
+                entrada=scanner.nextLine();
+                stringSplit=entrada.split(" ");
+                carrinho.removerProduto(stringSplit[0], Integer.parseInt(stringSplit[1]));
+            }
+            else if(entrada.matches("N")){
+                System.out.print("Fim do Programa\n");
+                return;
+            }
+            
+            carrinho.imprimirCarrinho();
+            
+        }
+        
+        //Finalizando compra
+        while(true){
+            System.out.print("\nDeseja finalizar a compra? S/N\n"); 
+            entrada=scanner.nextLine();
 
+            if(entrada.matches("S")){
+                if(mercado.tipoPagamentoAceito(carrinho.tipoPagamento))if(cliente.pagar(carrinho.total)){
+                    mercado.comprar(carrinho);
+                    System.out.print("Compra finalizada com sucesso!\n");
+                    cliente.checarSaldo();
+                    break;
+                }
+            }
+            else if(entrada.matches("N")){//Caso o cliente queira remover algum produto
+                while(true){
+
+                    System.out.print("\nDeseja remover algum produto? S/N\n");
+                    entrada=scanner.nextLine();
+
+                    if(entrada.matches("S")){
+                        System.out.print("Qual o nome do produto que deseja remover e quantos? (-1 para todos do mesmo item)\n");
+                        entrada=scanner.nextLine();
+                        stringSplit=entrada.split(" ");
+                        carrinho.removerProduto(stringSplit[0], Integer.parseInt(stringSplit[1]));
+                    }
+                    else if(entrada.matches("N")){
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
