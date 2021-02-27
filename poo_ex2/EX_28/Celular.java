@@ -10,7 +10,7 @@ public class Celular {
     
     Bateria bateria=new Bateria();
     
-    void setCelular(int n, boolean o,String m, Bateria bat){
+    void setCelular(int n, boolean o,String m, Bateria bat){ // criar um celular sem caixa postal
         this.numero=n;
         this.ocupado=o;
         this.modelo=m;
@@ -19,7 +19,7 @@ public class Celular {
         this.bateria.u=bat.u;
     }
     
-    void setCelular(int n, boolean o,String m, Bateria bat, String c){
+    void setCelular(int n, boolean o,String m, Bateria bat, String c){ // criar um celular com caixa postal
         this.numero=n;
         this.ocupado=o;
         this.modelo=m;
@@ -52,6 +52,17 @@ public class Celular {
     int checarCarga(){
         System.out.print(this.bateria.nivelCarga+"% de bateria restante\n");
         return this.bateria.nivelCarga;
+    }
+    
+    boolean estaOcupado(){
+        if(this.ocupado){ 
+            System.out.print("Ocupado \n");
+            return true;
+        }
+        else {
+            System.out.print("Disponivel \n");
+            return false;
+        }
     }
     
     

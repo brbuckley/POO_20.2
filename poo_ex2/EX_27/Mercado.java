@@ -31,6 +31,9 @@ public class Mercado {
         this.produtos.add(temp);
     }
     
+    //recebe uma string como todos os produtos a serem adicionados para agilizar o teste
+    // a entrada é feita de forma:
+    //"Codigo_do_produto(inteiro) Nome_do_produto(String) Preco_do_Produto(inteiro) Estoque(inteiro) *repete para o prox*"
     void setProdutos(String entrada){
         String[] stringArray=entrada.split(" ");
         for(int i=0;i<stringArray.length;i+=4){

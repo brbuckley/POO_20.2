@@ -4,7 +4,7 @@ package poo_ex2.Ex_26;
  */
 public class Carta {
     
-    int valor; // Ordem de valor, √Ås representa 1 e rei 13
+    int valor; // Ordem de valor, √?s representa 1 e rei 13
     int naipe; // 1 ouro 2 espada 3 copas 4 paus
     
     void setCarta(int v, int n){
@@ -12,7 +12,7 @@ public class Carta {
         this.naipe=n;
     }
     
-    void imprimirCarta(){
+    void imprimirCarta(){// Imprime a carta por extenso
         int temp1=this.valor+1,temp2=this.naipe+1;
         String string1=new String();
         String string2=new String();
@@ -20,7 +20,7 @@ public class Carta {
         switch(temp1){
             
             case 1:
-                string1= "√Ås";
+                string1= "√?s";
                 break;
             case 2:
                 string1="Dois";
@@ -76,6 +76,6 @@ public class Carta {
 
         }
         System.out.print("A carta √© "+string1+" de "+string2+".\n");
-    }// Imprime a carta por extenso
+    }
     
 }

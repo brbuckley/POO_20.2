@@ -11,7 +11,7 @@ public class Rede {
     
     ArrayList<Celular> celulares= new ArrayList<Celular>(); //guardar ponteiros de celulares
     
-    void adicionarCelular(Celular cel){//adicionar uma referencia a rede
+    void adicionarCelular(Celular cel){//adicionar uma referencia de um celular a rede
         celulares.add(cel);
     }
     

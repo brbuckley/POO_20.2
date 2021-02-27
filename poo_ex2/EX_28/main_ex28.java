@@ -16,6 +16,7 @@ public class main_ex28 {
     
     public static void main(String[] args) {
 
+        //criando variaveis e objetos para teste
         Rede rede = new Rede();
         
         Celular celular1 = new Celular();
@@ -33,6 +34,7 @@ public class main_ex28 {
         rede.adicionarCelular(celular1);
         rede.adicionarCelular(celular2);
         
+        //Teste 1: Enviar uma mensagem do celular 1 para o celular 2
         celular1.checarCarga();
         celular2.checarCarga();
         celular1.mensagemTexto(rede, 923456789, "Teste\n");
@@ -42,25 +44,18 @@ public class main_ex28 {
         celular2.checarCarga();
         System.out.print(celular2.checarCaixa()+"\n");
         
-        String temp=new String();
-        if(celular1.ocupado)temp="Ocupado\n";
-        else temp="Livre\n";
-        System.out.print("Celular1 :"+temp);
-        if(celular2.ocupado)temp="Ocupado\n";
-        else temp="Livre\n";
-        System.out.print("Celular2 :"+temp);
+        
+        //Teste 2: Usar o celular 1 para ligar para o celular 2
+        System.out.print("Celular1 :");celular1.estaOcupado();
+        System.out.print("Celular2 :");celular2.estaOcupado();
         
         celular1.chamada(rede, 923456789, 10);
         System.out.print("Chamada iniciada\n\n");
         celular1.checarCarga();
         celular2.checarCarga();
-
-        if(celular1.ocupado)temp="Ocupado\n";
-        else temp="Livre\n";
-        System.out.print("Celular1 :"+temp);
-        if(celular2.ocupado)temp="Ocupado\n";
-        else temp="Livre\n";
-        System.out.print("Celular2 :"+temp);
+        
+        System.out.print("Celular1 :");celular1.estaOcupado();
+        System.out.print("Celular2 :");celular2.estaOcupado();
         
     }
 }
