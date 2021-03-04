@@ -13,16 +13,18 @@ public class main_ex26 {
     public static void main(String[] args) {
         
         Baralho baralho = new Baralho();
-        baralho.setBaralho();
+        baralho.setBaralho(); // cria um baralho ordenado
         
         System.out.print("\n\n");
         baralho.imprimirBaralho();
         
+        System.out.print("\nEmbaralhando ...\n");
         baralho.embaralhar();
         
         System.out.print("\n\n");
         baralho.imprimirBaralho();
         
+        System.out.print("\nOrdenando ...\n");
         baralho.ordenar();
         
         System.out.print("\n\n");

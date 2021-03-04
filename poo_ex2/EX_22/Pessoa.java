@@ -2,12 +2,12 @@ package poo_ex2.EX_22;
 
 
 class Pessoa {
-    String nome;
-    int idade;
+    private String nome;
+    private int idade;
     
-    void setPessoa(String n, int i){
-        this.nome=n;
-        this.idade=i;
+    Pessoa(String nome, int idade){
+        this.nome=nome;
+        this.idade=idade;
     }
     
     void aniversario(){

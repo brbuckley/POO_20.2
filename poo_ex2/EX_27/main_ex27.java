@@ -17,8 +17,7 @@ public class main_ex27 {
         Scanner scanner = new Scanner(System.in);
         
         //criacao de um mercado com produtos
-        Mercado mercado =new Mercado();
-        mercado.setMercado(1, "Guanabara",10000);
+        Mercado mercado =new Mercado(1, "Guanabara",10000);
         mercado.setProdutos(  "109213 Arroz 5 47 "
                             + "498239 Feijao 2 21 "
                             + "214094 Bife 40 18 "
@@ -31,8 +30,7 @@ public class main_ex27 {
         String[] stringSplit;
         
         //supondo que o cliente tenha feito um cadastro antes
-        Cliente cliente=new Cliente();
-        cliente.setCliente("Ana", 300, 0); 
+        Cliente cliente=new Cliente("Ana", 300, 0);
 
         while(true){//adicionando os produtos pedidos ao carrinho
             
@@ -43,13 +41,13 @@ public class main_ex27 {
             
             stringSplit=entrada.split(" ");
 
-            carrinho.adicionarProduto(mercado.produtos.get(mercado.indexNome(stringSplit[0])),Integer.parseInt(stringSplit[1]));//adiciona produto no carrinho se estiver em estoque
+            carrinho.adicionarProduto(mercado.getProduto(mercado.indexNome(stringSplit[0])),Integer.parseInt(stringSplit[1]));//adiciona produto no carrinho se estiver em estoque
         }
         
         carrinho.imprimirCarrinho();
         
         // Se o valor da compra for maior que o saldo do cliente
-        while(carrinho.total>cliente.saldo){
+        while(carrinho.getTotal()>cliente.getSaldo()){
             System.out.print("\nSaldo Insuficiente\n");
             System.out.print("\nDeseja remover algum produto? S/N\n");
             entrada=scanner.nextLine();
@@ -75,7 +73,7 @@ public class main_ex27 {
             entrada=scanner.nextLine();
 
             if(entrada.matches("S")){
-                if(mercado.tipoPagamentoAceito(carrinho.tipoPagamento))if(cliente.pagar(carrinho.total)){
+                if(mercado.tipoPagamentoAceito(carrinho.getTipoPagamento()))if(cliente.pagar(carrinho.getTotal())){
                     mercado.comprar(carrinho);
                     System.out.print("Compra finalizada com sucesso!\n");
                     cliente.checarSaldo();

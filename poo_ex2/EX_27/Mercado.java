@@ -5,10 +5,20 @@ import java.util.ArrayList;
 /*
  */
 public class Mercado {
-    int codigo;
-    String nome;
-    ArrayList<Produto> produtos = new ArrayList<Produto>();
-    int cofre;
+    private int codigo;
+    private String nome;
+    private ArrayList<Produto> produtos = new ArrayList<Produto>();
+    private int cofre;
+    
+    Mercado(int c, String n,int cof){
+        this.codigo=c;
+        this.nome=n;
+        this.cofre=cof;
+    }
+    
+    Produto getProduto(int i){
+        return this.produtos.get(i);
+    }
     
     // tipo de pagamento 0 para dinheiro, 1 para cheque e 2 para cartão        
     boolean tipoPagamentoAceito(int t){
@@ -19,21 +29,12 @@ public class Mercado {
         }
     }
     
-    void setMercado(int c, String n,int cof){
-        this.codigo=c;
-        this.nome=n;
-        this.cofre=cof;
-    }
-    
     void novoProduto(int c, String n, int p, int e){
         Produto temp=new Produto();
         temp.setProduto(c,n,p,e);
         this.produtos.add(temp);
     }
     
-    //recebe uma string como todos os produtos a serem adicionados para agilizar o teste
-    // a entrada � feita de forma:
-    //"Codigo_do_produto(inteiro) Nome_do_produto(String) Preco_do_Produto(inteiro) Estoque(inteiro) *repete para o prox*"
     void setProdutos(String entrada){
         String[] stringArray=entrada.split(" ");
         for(int i=0;i<stringArray.length;i+=4){
@@ -46,7 +47,7 @@ public class Mercado {
         int temp;
         temp=this.indexNome(entrada);
         if (temp!=-1){
-            if (this.produtos.get(temp).estoque>quantidade) return this.produtos.get(temp).codigo;
+            if (this.produtos.get(temp).getEstoque()>quantidade) return this.produtos.get(temp).getCodigo();
             else return -1;
         }
         else return -1;
@@ -55,7 +56,7 @@ public class Mercado {
     // gera o indice do produto na lista cujo nome foi informado
     int indexNome(String nome){
         for(int i=0;i<this.produtos.size();i++){
-            if(this.produtos.get(i).nome.contentEquals(nome)) return i;
+            if(this.produtos.get(i).getNome().contentEquals(nome)) return i;
         }
         return -1;
     }
@@ -63,7 +64,7 @@ public class Mercado {
     // gera o indice do produto na lista cujo código foi informado
     int indexCodigo(int codigo){
         for(int i=0;i<this.produtos.size();i++){
-            if(this.produtos.get(i).codigo==codigo) return i;
+            if(this.produtos.get(i).getCodigo()==codigo) return i;
         }
         return -1;
     }
@@ -73,12 +74,11 @@ public class Mercado {
     //Porem não checa o saldo do cliente
     void comprar(Carrinho carrinho){ 
         int temp;
-        for(int i=0;i<carrinho.produtos.size();i++){
-            temp=this.indexCodigo(carrinho.produtos.get(i).codigo);
-            this.produtos.get(temp).estoque-=carrinho.produtos.get(i).estoque;
-            this.cofre+=carrinho.total;
-            carrinho.total=0;
-            carrinho.produtos.clear();
+        for(int i=0;i<carrinho.getSize();i++){
+            temp=this.indexCodigo(carrinho.getProduto(i).getCodigo());
+            this.produtos.get(temp).setEstoque(this.produtos.get(temp).getEstoque()-carrinho.getProduto(i).getEstoque());
+            this.cofre+=carrinho.getTotal();
+            carrinho.limpar();
         }
     }
     

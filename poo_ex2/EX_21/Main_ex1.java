@@ -16,7 +16,7 @@ public class Main_ex1 {
         while(true){
 
             System.out.println("Informe o nome, seguido do telefone celular e tel. fixo do contato " 
-                                + (agenda.contatos.size()+1) + ":");
+                                + (agenda.getSize()+1) + ":");
 
             scantemp = scanner.nextLine();
             
@@ -24,7 +24,9 @@ public class Main_ex1 {
 
             stringtemp=scantemp.split(" ");//criando cada contato
             if(stringtemp.length==2){ //telefone fixo opcional
-                contatotemp.setContato(stringtemp[0], stringtemp[1],"inexistente");}
+                contatotemp.setNome(stringtemp[0]);
+                contatotemp.setTelcel(stringtemp[1]);
+            }
             else {contatotemp.setContato(stringtemp[0], stringtemp[1],stringtemp[2]);}
                 
             agenda.adicionar(contatotemp);

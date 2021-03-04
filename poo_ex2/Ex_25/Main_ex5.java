@@ -13,12 +13,14 @@ desligar a TV, silenciar ou dessilenciar a TV e, por último, imprima o
 estado da TV.
  */
 
+/* A ideia foi criar um menu com botoes para simular um controle.
+*/
+
 public class Main_ex5 {
     
     public static void main(String[] args) {
         
-        Televisao tv=new Televisao();
-        tv.setTv(false, 5, 0, false);
+        Televisao tv=new Televisao(false, 5, 0, false);
         
         boolean controle=true;
         int entrada;

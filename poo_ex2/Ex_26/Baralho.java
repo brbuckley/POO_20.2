@@ -8,11 +8,10 @@ import java.util.Random;
 
 public class Baralho {
     
-    ArrayList<Carta> baralho = new ArrayList<Carta>();
+    private ArrayList<Carta> baralho = new ArrayList<Carta>();
     
     void novaCarta(int v, int n){
-        Carta temp=new Carta();
-        temp.setCarta(v, n);
+        Carta temp=new Carta(v,n);
         this.baralho.add(temp);
     }
     
@@ -52,52 +51,22 @@ public class Baralho {
     
     void trocarCartas(int a, int b){ // facilitador para outras funções
         if(a!=b){
-            Carta tempC = new Carta();
-            tempC.setCarta(this.baralho.get(a).valor,this.baralho.get(a).naipe);
-            this.baralho.get(a).setCarta(this.baralho.get(b).valor,this.baralho.get(b).naipe);
-            this.baralho.get(b).setCarta(tempC.valor,tempC.naipe);
+            Carta tempC = new Carta(this.baralho.get(a).getValor(), this.baralho.get(a).getNaipe());
+            this.baralho.get(a).setCarta(this.baralho.get(b).getValor(),this.baralho.get(b).getNaipe());
+            this.baralho.get(b).setCarta(tempC.getValor(),tempC.getNaipe());
         }
         else System.out.print("Erro\n");
     }
     
     void ordenar(){
-        //this.quickSort((Carta[]) this.baralho.toArray(new Carta[0]), 0, 51); //Isso é uma tentativa falha de quicksort
-        
+
         //Nem um pouco eficiente
         for(int i=0;i<51;i++){
             for(int j=i+1;j<52;j++){
-                if((this.baralho.get(i).naipe)*13+(this.baralho.get(i).valor+1)>(this.baralho.get(j).naipe)*13+(this.baralho.get(j).valor+1)){
+                if((this.baralho.get(i).getNaipe())*13+(this.baralho.get(i).getValor()+1)>(this.baralho.get(j).getNaipe())*13+(this.baralho.get(j).getValor()+1)){
                     this.trocarCartas(i, j);
                 }
             }
         }
     }
-    
-    /* BUGADO
-    private int partition(Carta arr[], int begin, int end) {
-    int pivot = ((arr[end].naipe)*13+((arr[end].valor)+1));
-    int i = (begin-1);
-
-    for (int j = begin; j < end-1; j++) {
-        if ( ((arr[j].naipe)*13+((arr[j].valor)+1)) <= pivot) {
-            i++;
-
-            this.trocarCartas(i, j);
-        }
-    }
-
-    this.trocarCartas(i+1, end);
-
-    return i+1;
-    }
-    
-    public void quickSort(Carta arr[], int begin, int end) {
-    if (begin < end) {
-        int partitionIndex = partition(arr, begin, end);
-
-        quickSort(arr, begin, partitionIndex-1);
-        quickSort(arr, partitionIndex+1, end);
-    }
-    }
-    */
 }

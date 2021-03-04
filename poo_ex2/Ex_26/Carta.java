@@ -4,23 +4,29 @@ package poo_ex2.Ex_26;
  */
 public class Carta {
     
-    int valor; // Ordem de valor, √?s representa 1 e rei 13
-    int naipe; // 1 ouro 2 espada 3 copas 4 paus
+    private int valor; // Ordem de valor, √Ås representa 1 e rei 13
+    private int naipe; // 1 ouro 2 espada 3 copas 4 paus
     
-    void setCarta(int v, int n){
+    Carta(int v, int n){
         this.valor=v;
         this.naipe=n;
     }
     
-    void imprimirCarta(){// Imprime a carta por extenso
-        int temp1=this.valor+1,temp2=this.naipe+1;
+    public void setCarta(int v, int n){
+        this.valor=v;
+        this.naipe=n;
+    }
+    
+    // Imprime a carta por extenso
+    void imprimirCarta(){
+        int temp1=this.getValor()+1,temp2=this.getNaipe()+1;
         String string1=new String();
         String string2=new String();
                 
         switch(temp1){
             
             case 1:
-                string1= "√?s";
+                string1= "√Ås";
                 break;
             case 2:
                 string1="Dois";
@@ -76,6 +82,20 @@ public class Carta {
 
         }
         System.out.print("A carta √© "+string1+" de "+string2+".\n");
+    }
+
+    /**
+     * @return the valor
+     */
+    public int getValor() {
+        return valor;
+    }
+
+    /**
+     * @return the naipe
+     */
+    public int getNaipe() {
+        return naipe;
     }
     
 }

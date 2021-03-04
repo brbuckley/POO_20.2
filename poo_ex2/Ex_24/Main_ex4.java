@@ -42,25 +42,21 @@ public class Main_ex4 {
         casa.novaPorta(porta);
         }
         
-        System.out.print("Numa casa da cor :"+casa.cor+"\n"); // imprime a casa e as portas
-        for(int i=0;i<casa.portas.size();i++){
-            casa.portas.get(i).imprimir();
-        }
+        casa.imprimir();
         
         int n=casa.quantasPortasEstaoAbertas();
         System.out.print(n+" porta(s) abertas\n");
         
-        if (casa.portas.isEmpty()==false)casa.abrirFecharPortas(1); //abrindo ou fechando a primeira porta
+        System.out.print("\n Fechando/Abrindo a porta 1\n");
+        if (casa.temPortas())casa.abrirFecharPortas(1); //abrindo ou fechando a primeira porta ( no caso 1 se refere a 0 )
         
         n=casa.quantasPortasEstaoAbertas();
         System.out.print(n+" porta(s) abertas\n");
         
+        System.out.print("\nPintando a casa\n");
         casa.pintar("Verde"); // pinta a casa
         
-        System.out.print("Numa casa da cor "+casa.cor);
-        for(int i=0;i<casa.portas.size();i++){
-            casa.portas.get(i).imprimir();
-        }
+        casa.imprimir();
         
     }
     

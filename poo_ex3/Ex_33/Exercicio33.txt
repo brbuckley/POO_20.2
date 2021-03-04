@@ -1,0 +1,1 @@
+Os exercicios da aula 2 foram refeitos com construtores, get e set.

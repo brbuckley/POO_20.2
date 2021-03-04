@@ -16,25 +16,17 @@ public class main_ex28 {
     
     public static void main(String[] args) {
 
-        //criando variaveis e objetos para teste
         Rede rede = new Rede();
         
-        Celular celular1 = new Celular();
-        Celular celular2 = new Celular();
+        Bateria bat1 = new Bateria(10, 100);
+        Bateria bat2 = new Bateria(8, 50);
         
-        Bateria bat1 = new Bateria();
-        Bateria bat2 = new Bateria();
-        
-        bat1.setBateria(10, 100);
-        bat2.setBateria(8, 50);
-        
-        celular1.setCelular(999999999, false, "MotoG", bat1);
-        celular2.setCelular(923456789, false, "Iphone", bat2);
+        Celular celular1 = new Celular(999999999, false, "MotoG", bat1);
+        Celular celular2 = new Celular(923456789, false, "Iphone", bat2);
         
         rede.adicionarCelular(celular1);
         rede.adicionarCelular(celular2);
         
-        //Teste 1: Enviar uma mensagem do celular 1 para o celular 2
         celular1.checarCarga();
         celular2.checarCarga();
         celular1.mensagemTexto(rede, 923456789, "Teste\n");
@@ -42,20 +34,27 @@ public class main_ex28 {
         
         celular1.checarCarga();
         celular2.checarCarga();
-        System.out.print(celular2.checarCaixa()+"\n");
+        System.out.print("Mensagem: "+celular2.checarCaixa()+"\n");
         
-        
-        //Teste 2: Usar o celular 1 para ligar para o celular 2
-        System.out.print("Celular1 :");celular1.estaOcupado();
-        System.out.print("Celular2 :");celular2.estaOcupado();
+        String temp=new String();
+        if(celular1.isOcupado())temp="Ocupado\n";
+        else temp="Livre\n";
+        System.out.print("Celular1 :"+temp);
+        if(celular2.isOcupado())temp="Ocupado\n";
+        else temp="Livre\n";
+        System.out.print("Celular2 :"+temp);
         
         celular1.chamada(rede, 923456789, 10);
         System.out.print("Chamada iniciada\n\n");
         celular1.checarCarga();
         celular2.checarCarga();
-        
-        System.out.print("Celular1 :");celular1.estaOcupado();
-        System.out.print("Celular2 :");celular2.estaOcupado();
+
+        if(celular1.isOcupado())temp="Ocupado\n";
+        else temp="Livre\n";
+        System.out.print("Celular1 :"+temp);
+        if(celular2.isOcupado())temp="Ocupado\n";
+        else temp="Livre\n";
+        System.out.print("Celular2 :"+temp);
         
     }
 }

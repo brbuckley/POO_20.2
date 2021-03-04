@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Agenda {
 
-    ArrayList<Contato> contatos = new ArrayList<Contato>();
+    private ArrayList<Contato> contatos = new ArrayList<Contato>();
+    
+    public int getSize(){
+        return this.contatos.size();
+    }
     
     void adicionar(Contato temp){ //adiciona o contato a proxima posição
-        Contato contato= new Contato();
-        contato.setContato(temp.nome, temp.telcel, temp.telfix);
+        Contato contato= new Contato(temp.getNome(),temp.getTelcel(),temp.getTelfix());
         contatos.add(contato);
     }
     
@@ -16,7 +19,7 @@ public class Agenda {
         System.out.println("\nAgenda :");
         
         for(Contato x : contatos){
-            System.out.println("Nome "+x.nome+" Tel. cel. "+x.telcel+" Tel. fixo "+x.telfix);
+            x.imprimir();
         }
     }
 }

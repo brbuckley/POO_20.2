@@ -4,12 +4,12 @@ package poo_ex2.Ex_25;
 //específico, canal anterior, próximo canal) e silenciar a televisão
 
 public class Televisao {
-    boolean estado;
-    int volume;
-    int canal;
-    boolean silencioso;
+    private boolean estado;
+    private int volume;
+    private int canal;
+    private boolean silencioso;
     
-    void setTv(boolean e, int v, int c, boolean s){
+    Televisao(boolean e, int v, int c, boolean s){
         this.canal=c;
         this.estado=e;
         this.silencioso=s;

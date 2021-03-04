@@ -2,30 +2,29 @@ package poo_ex2.EX_28;
 
 public class Celular {
     
+    private int numero;
+    private boolean ocupado;
+    private String modelo;
+    private String caixaPostal=new String();
     
-    int numero;
-    boolean ocupado;
-    String modelo;
-    String caixaPostal=new String();
+    private Bateria bateria=new Bateria();
     
-    Bateria bateria=new Bateria();
-    
-    void setCelular(int n, boolean o,String m, Bateria bat){ // criar um celular sem caixa postal
+    Celular(int n, boolean o,String m, Bateria bat){
         this.numero=n;
         this.ocupado=o;
         this.modelo=m;
         this.caixaPostal="Vazio\n";
-        this.bateria.nivelCarga=bat.nivelCarga;
-        this.bateria.u=bat.u;
+        this.bateria.setNivelCarga(bat.getNivelCarga());
+        this.bateria.setU(bat.getU());
     }
     
-    void setCelular(int n, boolean o,String m, Bateria bat, String c){ // criar um celular com caixa postal
+    Celular(int n, boolean o,String m, Bateria bat, String c){
         this.numero=n;
         this.ocupado=o;
         this.modelo=m;
         this.caixaPostal=c;
-        this.bateria.nivelCarga=bat.nivelCarga;
-        this.bateria.u=bat.u;
+        this.bateria.setNivelCarga(bat.getNivelCarga());
+        this.bateria.setU(bat.getU());
     }
     
     String checarCaixa(){
@@ -34,35 +33,46 @@ public class Celular {
     
     void mensagemTexto(Rede rede, int n, String mensagem){//1 u
         String temp=mensagem;
-        this.bateria.nivelCarga-=(int)100/this.bateria.u;
-        rede.celulares.get(rede.indexNumero(n)).caixaPostal=temp;
+        this.bateria.setNivelCarga(this.bateria.getNivelCarga()-(int)100/this.bateria.getU());
+        rede.getCelular(rede.indexNumero(n)).setCaixaPostal(temp);
         
     }
             
     void chamada(Rede rede, int n, int tempo){//1 u a cada 5 seg
-        if(rede.celulares.get(rede.indexNumero(n)).ocupado)System.out.print("Telefone Ocupado\n");
+        if(rede.getCelular(rede.indexNumero(n)).isOcupado())System.out.print("Telefone Ocupado\n");
         else{
-            rede.celulares.get(rede.indexNumero(n)).bateria.nivelCarga-=(int) ((tempo/5)*100/this.bateria.u);
-            rede.celulares.get(rede.indexNumero(n)).ocupado=true;
-            this.bateria.nivelCarga-=(int) ((tempo/5)*100/this.bateria.u);
+            rede.getCelular(rede.indexNumero(n)).bateria.setNivelCarga(rede.getCelular(rede.indexNumero(n)).bateria.getNivelCarga()-(int) ((tempo/5)*100/this.bateria.getU()));
+            rede.getCelular(rede.indexNumero(n)).setOcupado(true);
+            this.bateria.setNivelCarga(this.bateria.getNivelCarga()-(int) ((tempo/5)*100/this.bateria.getU()));
             this.ocupado=true;
         }
     }
     
     int checarCarga(){
-        System.out.print(this.bateria.nivelCarga+"% de bateria restante\n");
-        return this.bateria.nivelCarga;
+        System.out.print(this.bateria.getNivelCarga()+"% de bateria restante\n");
+        return this.bateria.getNivelCarga();
+    }
+
+    /**
+     * @return the ocupado
+     */
+    public boolean isOcupado() {
+        return ocupado;
     }
     
-    boolean estaOcupado(){
-        if(this.ocupado){ 
-            System.out.print("Ocupado \n");
-            return true;
-        }
-        else {
-            System.out.print("Disponivel \n");
-            return false;
-        }
+    public void setOcupado(boolean b){
+        this.ocupado=b;
+    }
+    
+    public void setCaixaPostal(String s){
+        this.caixaPostal=s;
+    }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
     }
     
     

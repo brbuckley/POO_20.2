@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Casa {
     
-    String cor;
-    ArrayList<Porta> portas = new ArrayList<Porta>();
+    private String cor;
+    private ArrayList<Porta> portas = new ArrayList<Porta>();
     
     void pintar(String c){
         this.cor=c;
     }
     
-    void abrirFecharPortas(int j){ //abre ou fecha a porta j
+    String getCor(){
+        return this.cor;
+    }
+    
+    void abrirFecharPortas(int j){ //abre ou fecha a porta j ( comecando do 1 e nao do 0 )
         portas.get(j-1).abrirFechar();
     }
     
@@ -26,9 +30,14 @@ public class Casa {
         return pA;
     }
     
+    boolean temPortas(){
+        if (this.portas.isEmpty())return false;
+        else return true;
+    }
+    
     void novaPorta(Porta p){
         Porta temp=new Porta();
-        temp.setPorta(p.cor, p.altura, p.largura, p.estado);
+        temp.setPorta(p.getCor(), p.getAltura(), p.getLargura(), p.isEstado());
         this.portas.add(temp);
     }
     
@@ -39,4 +48,12 @@ public class Casa {
         if (p3!=null)this.portas.add(p3);
     }
     
+    void imprimir(){
+        System.out.print("\n");
+        System.out.print("Numa casa da cor :"+this.cor+"\n"); // imprime a casa e as portas
+        for(int i=0;i<this.portas.size();i++){
+            this.portas.get(i).imprimir();
+        }
+        System.out.print("\n");
+    }
 }
