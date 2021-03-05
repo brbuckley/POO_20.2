@@ -66,7 +66,7 @@ public class Data {
             }
         }
         else{
-            for(int i=0; i<this.ddmm[1];i++){
+            for(int i=1; i<this.ddmm[1];i++){
                 if (i==2) cont=3;
                 else if (i==4 | i==6 | i==9 | i==11) cont=2;
                 else cont=1;
