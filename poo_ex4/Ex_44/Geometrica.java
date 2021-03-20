@@ -15,7 +15,7 @@ public class Geometrica {
         this.base=base;
     }
     
-    double getArea(){
+    public double getArea(){
         return this.area;
     }
     
@@ -27,11 +27,11 @@ public class Geometrica {
         return this.base;
     }
     
-    void calculaArea(){
+    public void calculaArea(){
         this.area=this.base*this.base;
     }
     
-    void imprimir(){
+    public void imprimir(){
         System.out.print("A area mede "+area+" cm2\n");
     }
     
