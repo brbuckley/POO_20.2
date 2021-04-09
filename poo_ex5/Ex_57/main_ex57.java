@@ -16,11 +16,11 @@ public class main_ex57 {
     
     public static void main(String args[]){
         //Completar o caminho para funcionar corretamente
-        String caminho= "C:\\ ... \\src\\poo_ex5\\Ex_57\\RegistroFuncionarios.txt";
+        String caminho= "C:\\Users\\buckl\\Documents\\NetBeansProjects\\POO_Ex\\src\\poo_ex5\\Ex_57\\Registros.txt";
         Funcionario teste= new Funcionario(214,"Joel",2198,291874);
-        ArquivoFuncionario.Write(caminho, teste);
+        ArquivoFuncionario.escreve(caminho, teste);
         
-        //ArquivoFuncionario.Read(caminho);
+        ArquivoFuncionario.leitura(caminho);
         
         
     }

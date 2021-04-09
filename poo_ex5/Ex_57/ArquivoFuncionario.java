@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -20,39 +22,36 @@ import poo_ex5.Ex_56.Registro;
  */
 
 public class ArquivoFuncionario {
-    public static void Read(String Caminho){
+    public static void leitura(String Caminho){
         //ArrayList<Funcionario> registros=new ArrayList<Funcionario>();
         try {
             FileInputStream input = new FileInputStream(Caminho);
-            InputStreamReader lerInput = new InputStreamReader(input);
-            BufferedReader lerArquivo = new BufferedReader(lerInput);
-            char nome[] = null;
-            int controle=1;
+            ObjectInputStream lerInput = new ObjectInputStream(input);
             try {
-                controle = lerInput.read(nome, 4, 16);
-                /*while(controle!=0){
-                    System.out.print(nome+"\n");
-                    controle = lerInput.read(nome, 4, 16);
-                }*/
+                System.out.print(((Funcionario)lerInput.readObject()).nome);
                 input.close();
                 return;
             } catch (IOException ex) {
                 System.out.println("Erro: Não foi possível ler o arquivo!");
                 return;
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Erro: Arquivo não encontrado!");
-            return;
-        }
+            catch (ClassNotFoundException ex) {
+                System.out.println("Erro: Classe nao existe!");
+                return;
+            }
+        } catch (IOException ex) {
+                System.out.println("Erro: Não foi possível ler o arquivo!");
+                return;
+            }
     }
     
-    public static boolean Write(String Caminho,Funcionario entrada){
+    public static boolean escreve(String Caminho,Funcionario entrada){
         try {
-            FileOutputStream arquivo = new FileOutputStream(Caminho,true);
-            OutputStreamWriter escreve = new OutputStreamWriter(arquivo);
-            //escreve.append(entrada.nome.subSequence(0, entrada.nome.length()));
-            escreve.write(entrada.nome);
-            arquivo.close();
+            FileOutputStream arquivo = new FileOutputStream(Caminho);
+            ObjectOutputStream funcionario= new ObjectOutputStream(arquivo);
+            funcionario.writeObject(entrada);
+            funcionario.flush();
+            funcionario.close();
             return true;
         }catch(IOException e){
             System.out.println(e.getMessage());

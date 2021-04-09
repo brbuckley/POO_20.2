@@ -1,8 +1,10 @@
 package poo_ex5.Ex_57;
 
+import java.io.Serializable;
+
 /*
  */
-public class Funcionario {
+public class Funcionario implements Serializable{
     
     int registro;
     String nome;
