@@ -43,6 +43,7 @@ public class main_ex63 {
         System.out.print("\nAdicionando Cliente 5:\n");
         tentaAdicionar(cadastro,"12312312345");
         
+        //Buscas
         System.out.print("\nBuscando cliente 1:\n");
         tentaBuscar(cadastro,"12345678900");
         
